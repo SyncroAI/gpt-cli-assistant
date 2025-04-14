@@ -36,7 +36,7 @@ Ein terminalbasiertes CLI-Tool zur Interaktion mit OpenAI GPT-3.5 und GPT-4 – 
 1. **Repository klonen**
 
 ```bash
-git clone https://github.com/dein-nutzername/gpt-assistant-cli.git
+git clone https://github.com/SyncroAI/gpt-assistant-cli.git
 cd gpt-assistant-cli
 ```
 
@@ -116,9 +116,5 @@ Wenn dir das Tool gefällt, gib ihm gerne einen Stern auf GitHub!
 
 ---
 
-**Lizenz:** MIT © Dein Name
-
-
-
-**Lizenz:** MIT © Dein Name
+**Lizenz:** MIT © SyncroAI 
 
