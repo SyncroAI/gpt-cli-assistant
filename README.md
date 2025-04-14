@@ -1,137 +1,124 @@
-# 🤖 GPT CLI Assistant
+# GPT-Assistant (CLI Tool)
 
-Ein schlanker, lokaler OpenAI-Chat-Assistent für dein Terminal – komplett mit Sessions, Zusammenfassungen & Einstellungsmenü.
-
-## ✨ Features
-
-- 🧠 Lokaler Verlauf in Markdown (`chat_logs/`)
-- 🗂️ Beliebig viele Sessions – automatisch gespeichert
-- 📝 Automatische Zusammenfassungen deiner Gespräche
-- ⚙️ Einstellbares Verhalten direkt im Terminal:
-  - Modellwahl (GPT-3.5 oder GPT-4)
-  - Max. Tokens für Zusammenfassungen
-  - Zusammenfassung an-/ausschalten
-- 🖇️ Optional: Symlink-Integration → `gpt` von überall im Terminal starten
+Ein terminalbasiertes CLI-Tool zur Interaktion mit OpenAI GPT-3.5 und GPT-4 – lokal, einfach, effizient.
 
 ---
 
-## 📦 Installation
+## Funktionen
 
-### 1. Repository klonen
+- **Chat-Verwaltung mit Sessions**  
+  Erstelle, öffne und verwalte verschiedene Chat-Sessions direkt im Terminal.
+
+- **Modellwahl**  
+  Nutze GPT-3.5 oder GPT-4, je nach Bedarf.
+
+- **Automatische Zusammenfassungen**  
+  Nach einer bestimmten Anzahl von Nachrichten wird automatisch eine Zusammenfassung erstellt.
+
+- **Markdown-Speicherung**  
+  Alle Gespräche werden lokal als `.md` gespeichert – perfekt zur Archivierung, Nachbearbeitung oder Weitergabe.
+
+- **Einstellbare Parameter**  
+  Passe max. Tokens, Zusammenfassungsintervall u.v.m. direkt über das Terminal an.
+
+---
+
+## Datenstruktur
+
+- `chat_logs/session_name.md` → Dein Chatverlauf im Markdown-Format  
+- `chat_logs/session_name.summary.txt` → Automatisch generierte Zusammenfassung  
+- `.env` → API-Key und andere Umgebungsvariablen (nicht ins Git hochladen!)  
+
+---
+
+## Installation
+
+1. **Repository klonen**
 
 ```bash
-git clone https://github.com/SyncroAI/gpt-cli-assistant.git
-cd gpt-cli-assistant
-2. Python-Umgebung & Abhängigkeiten installieren
-bash
-Copy
-Edit
-python3 -m venv .venv
-source .venv/bin/activate
+git clone https://github.com/dein-nutzername/gpt-assistant-cli.git
+cd gpt-assistant-cli
+```
+
+2. **Abhängigkeiten installieren**
+
+```bash
 pip install -r requirements.txt
-3. API-Key setzen
-Erstelle eine Datei .env mit folgendem Inhalt:
+```
 
-dotenv
-Copy
-Edit
-OPENAI_API_KEY=dein-api-key-hier
-🔐 API-Key bekommst du hier: https://platform.openai.com/account/api-keys
+3. **API-Key einrichten**
 
-🚀 Optional: Als Befehl gpt systemweit nutzen
-Erstelle einen Symlink, damit du den Chat einfach mit gpt starten kannst:
+Erstelle eine `.env` Datei mit folgendem Inhalt:
 
-bash
-Copy
-Edit
-sudo ln -s /voller/pfad/zum/projekt/script/start.sh /usr/local/bin/gpt
-Beispiel:
+```env
+OPENAI_API_KEY=dein-openai-api-key
+```
 
-bash
-Copy
-Edit
-sudo ln -s ~/git/gpt-cli-assistant/script/start.sh /usr/local/bin/gpt
-Dann kannst du einfach loslegen:
+4. **(Optional) Symlink erstellen**
 
-bash
-Copy
-Edit
+Damit du das Tool von überall mit `gpt` starten kannst:
+
+```bash
+sudo ln -s /voller/pfad/zum/script/gpt_chat.py /usr/local/bin/gpt
+```
+
+> Beispiel:
+> ```bash
+> sudo ln -s /home/user/gpt-assistant-cli/gpt_chat.py /usr/local/bin/gpt
+> ```
+
+---
+
+## Anwendung
+
+Nach erfolgreicher Einrichtung kannst du einfach im Terminal `gpt` eingeben:
+
+```bash
 gpt
-💬 Nutzung
-bash
-Copy
-Edit
-gpt
-Dann erscheint das Menü:
+```
 
-csharp
-Copy
-Edit
-[GPT] Modell wählen:
-[1] GPT-4
-[2] GPT-3.5
-[3] ⚙️ Einstellungen ändern
-Nach Modellwahl:
+Dann stehen dir interaktive Menüs zur Verfügung:
+- Neue Session starten oder bestehende auswählen
+- Modell auswählen (GPT-3.5 oder GPT-4)
+- Einstellungen anpassen (Token-Limit, Zusammenfassungen, etc.)
 
-csharp
-Copy
-Edit
-[GPT] Verfügbare Sessions:
-[1] letzte-session
-[2] ➕ Neue Session starten
-Beispielhafte Unterhaltung:
+---
 
-text
-Copy
-Edit
-[Du]: Wie baue ich eine PostgreSQL-Abfrage?
-[GPT]: Du kannst z. B. folgendes nutzen: ...
-⚙️ Einstellungen ändern
-Über [3] ⚙️ Einstellungen ändern kannst du während der Session:
+## Beispielhafte Nutzung
 
-maximale Tokens für Zusammenfassungen setzen
+```bash
+# Session starten
+> gpt
 
-Zusammenfassungen deaktivieren
+# Eingabebeispiel
+Du: Erkläre mir Quantenverschränkung in einfachen Worten.
+GPT: ...
 
-Intervall der Zusammenfassungen ändern
+# Zusammenfassung erscheint automatisch nach z. B. 10 Nachrichten
+```
 
-📁 Verläufe & Zusammenfassungen
-Alle Chats werden im Ordner chat_logs/ gespeichert:
+---
 
-text
-Copy
-Edit
-chat_logs/
-├── mein_chat.md              # Vollständiger Chatverlauf (Markdown)
-└── mein_chat.summary.txt     # Letzte Zusammenfassung (reine Textdatei)
-🧨 Kommende Features (optional)
-Du kannst bald nutzen:
+## To-Do / Ideen für die Zukunft
 
-bash
-Copy
-Edit
-gpt --list      # zeigt alle gespeicherten Sessions
-gpt --delete xy # löscht Session xy
-✅ Voraussetzungen
-Python 3.7+
+- Interaktive Session-Verwaltung (z. B. zum Löschen, Umbenennen)
+- Erweiterte Konfiguration via YAML oder JSON
+- Statistiken über Token-Verbrauch
+- Exportfunktionen (PDF, HTML)
+- Backup-/Archivierungssystem
 
-OpenAI API-Key
+---
 
-Linux/macOS-Terminal
+## Mitmachen & Feedback
 
-🧠 Idee & Umsetzung
-Dieses Projekt entstand aus einer Idee für einen persönlichen, schnellen Terminal-Assistenten – ohne Chat-Verlauf bei OpenAI, lokal speichernd & flexibel.
+Pull Requests, Feature-Ideen und Feedback sind herzlich willkommen!  
+Wenn dir das Tool gefällt, gib ihm gerne einen Stern auf GitHub!
 
-Built with Liebe, Terminal-Hackerei & ein bisschen Wahnsinn 🧪
+---
 
-📜 Lizenz
-MIT License – feel free to fork, verbessern, teilen.
+**Lizenz:** MIT © Dein Name
 
-💖 Support & Mitmachen
-Wenn du’s nützlich findest:
 
-⭐ Star da lassen
-🍴 Forken & erweitern
-📢 Spread the Word
 
-Made with ❤️ by SyncroAI
+**Lizenz:** MIT © Dein Name
+
